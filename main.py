@@ -43,7 +43,7 @@ def play_sound(sound):
 backgroundimg = imgDefine("resource/ui/background.png",WIDTH,HEIGHT).convert()
 startimg = pygame.image.load("resource/ui/gamestart_01.png")
 clickstartimg = pygame.image.load("resource/ui/gamestart_02.png")
-waterimg = imgDefine("resource/object/water.png", 100, 100)
+waterimg = imgDefine("resource/object/water.png", 75, 75)
 quitimg = pygame.image.load("resource/ui/gamequit_01.png")
 clickquitimg = pygame.image.load("resource/ui/gamequit_02.png")
 menuimg = imgDefine("resource/ui/menu.png", WIDTH,HEIGHT).convert()
@@ -165,7 +165,7 @@ class Player:
         # 플레이어의 충돌 영역 정의
         player_rect = pygame.Rect(self.x, self.y, self.width, self.height)
         # water의 충돌 영역 정의
-        water_rect = pygame.Rect(water.x, water.y, 100, 100)
+        water_rect = pygame.Rect(water.x, water.y, 70, 70)
         # 충돌 체크
         return player_rect.colliderect(water_rect)
 
@@ -239,7 +239,7 @@ def mainGame():
         # 일정 시간마다 비 생성
         
         current_timef = pygame.time.get_ticks()
-        if current_timef - last_raindrop_time > 3000:  # 3초에 한번
+        if current_timef - last_raindrop_time > 1000:  # 3초에 한번
             down.append(bulletDown())
             up.append(bulletUp())
             right.append(bulletRight())
@@ -312,9 +312,12 @@ def gameOver():
         screen.fill(WHITE)
         game_over_text = score_font.render("Game Over", True, BLACK)
         score_text = score_font.render(f"Your Score: {score}", True, BLACK)
+        retryText = menu_font.render("메뉴로", True, BLACK)
+        retryClickText = menu_font.render("메뉴로", True, RED)
+        retryButton = Button(retryText,screen_center[0],screen_center[1],300,200,retryClickText,mainmenu)
 
-        screen.blit(game_over_text, (screen_center[0] - 200, screen_center[1] - 50))
-        screen.blit(score_text, (screen_center[0] - 150, screen_center[1] + 50))
+        screen.blit(game_over_text, (screen_center[0] - 200, screen_center[1] - 300))
+        screen.blit(score_text, (screen_center[0] - 150, screen_center[1] -200))
 
         pygame.display.flip()
     

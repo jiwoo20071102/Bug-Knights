@@ -4,6 +4,8 @@ import sys
 from pygame.locals import *
 from time import sleep
 
+# 2024년 4월 20일
+
 delay = 1
 
 # 초기화
